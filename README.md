@@ -90,3 +90,7 @@ status is the worst of all directories. A missing directory is always CRITICAL.
 
 Modes: `exists` (default), `size` (MB), `count`, `oldest` (minutes), `newest`
 (minutes), `empty`. `-f` filters by file name pattern, `-r` includes sub-directories.
+
+## Documentation
+
+Full explanation of every script, in Hebrew: [docs/SCRIPTS.he.md](docs/SCRIPTS.he.md)
