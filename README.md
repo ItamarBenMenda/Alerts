@@ -73,3 +73,20 @@ cp *.sh /usr/lib/nagios/plugins/
 
 The user that runs the checks needs read access to the logs and write access
 to the state directory.
+
+## check_dir.sh — check one or more directories
+
+Several directories in one check: repeat `-d` or comma-separate them. The final
+status is the worst of all directories. A missing directory is always CRITICAL.
+
+```bash
+./check_dir.sh -d /data/in -d /data/out                        # both exist
+./check_dir.sh -d /data/in,/data/out -m count -w 100 -c 500    # file backlog
+./check_dir.sh -d /vault/outgoing -m oldest -w 30 -c 60        # files stuck > N min
+./check_dir.sh -d /data/in -m newest -f '*.csv' -w 60 -c 120   # no new file for N min
+./check_dir.sh -d /var/log -m size -r -w 5000 -c 10000         # total size in MB
+./check_dir.sh -d /data/in,/data/out -m empty                  # CRITICAL if no files
+```
+
+Modes: `exists` (default), `size` (MB), `count`, `oldest` (minutes), `newest`
+(minutes), `empty`. `-f` filters by file name pattern, `-r` includes sub-directories.
